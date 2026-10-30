@@ -1,4 +1,4 @@
-# HOTEL SHIFT — FIXED560
+# HOTEL SHIFT — FIXED561
 
 ホテルのスタッフ・シフト・希望休を管理するSwiftUIアプリ。iPhone、iPad、Mac Catalystに対応します。
 

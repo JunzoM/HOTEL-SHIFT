@@ -470,13 +470,6 @@ struct ShiftCalendarView: View {
         return request.status == .approved && isWorkingAssignment(assignment)
     }
 
-    private func requestFor(staffID: UUID, date: Date) -> ShiftRequest? {
-        let key = date.shiftDateKey
-        return store.selectedRequestsUnsorted.first { request in
-            request.staffID == staffID && request.dateKey == key
-        }
-    }
-
     @ViewBuilder
     private func requestMarker(_ request: ShiftRequest?) -> some View {
         if let request = request {
@@ -823,9 +816,7 @@ struct ShiftEditSheet: View {
     // Only approved leave requests conflict with a working shift. Pending requests
     // remain visible in the calendar but do not block routine scheduling.
     private var approvedRequest: ShiftRequest? {
-        store.selectedRequestsUnsorted.first {
-            $0.staffID == staff.id && $0.dateKey == date.shiftDateKey && $0.status == .approved
-        }
+        store.approvedRequest(staffID: staff.id, dateKey: date.shiftDateKey)
     }
 
     private var isWorkingShift: Bool {

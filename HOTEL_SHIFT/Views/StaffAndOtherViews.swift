@@ -1109,7 +1109,7 @@ struct StaffDetailSheet: View {
                                          onDelete: { deletingTime = item; deletingTimeLocationID = store.selectedLocationID })
                     Button {
                         guard let person = latestStaff else { return }
-                        let hasLeave = store.selectedRequestsUnsorted.contains { $0.staffID == person.id && $0.dateKey == personalApplyDate.shiftDateKey && $0.status == .approved }
+                        let hasLeave = store.hasApprovedLeave(staffID: person.id, dateKey: personalApplyDate.shiftDateKey)
                         pendingPersonalTime = PendingPersonalTime(item: item, date: personalApplyDate, staff: person,
                             assignment: store.assignment(staffID: person.id, date: personalApplyDate), hasLeave: hasLeave)
                     } label: {

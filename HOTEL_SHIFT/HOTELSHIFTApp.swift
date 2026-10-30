@@ -57,10 +57,11 @@ struct HOTELSHIFTApp: App {
                 } message: { Text("共有される全店舗のスタッフ・シフト・希望休を扱います。端末のデータと違う場合は、設定で使用するデータを選びます。") }
                 .preferredColorScheme(.light)
                 .onChange(of: scenePhase) { _, phase in
+                    // FIXED561: Save off the UI thread; willTerminate keeps the synchronous flush.
                     #if targetEnvironment(macCatalyst)
-                    if phase != .active { store.flushPendingSave() }
+                    if phase != .active { store.persistForBackground() }
                     #else
-                    if phase == .background { store.flushPendingSave() }
+                    if phase == .background { store.persistForBackground() }
                     #endif
                     if phase == .active { Task { await store.cloudSync.synchronize() } }
                 }

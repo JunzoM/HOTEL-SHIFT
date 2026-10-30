@@ -59,9 +59,16 @@ struct CloudSharePresentation: Identifiable {
         get { UserDefaults.standard.string(forKey: "hotelShift.cloud.tag") }
         set { UserDefaults.standard.set(newValue, forKey: "hotelShift.cloud.tag") }
     }
+    // FIXED561: The 30-second poll re-verified the Apple Account with two network calls each time.
+    // Reuse a verified account for a while and drop it as soon as the system reports a change.
+    private var verifiedAccount: (id: String, checkedAt: Date)?
+    private var accountObserver: NSObjectProtocol?
     init() {
         if let bytes = UserDefaults.standard.data(forKey: "hotelShift.cloud.target") { target = try? JSONDecoder().decode(CloudSyncTarget.self, from: bytes) }
         if enabled { status = "iCloudへの接続を確認します" }
+        accountObserver = NotificationCenter.default.addObserver(forName: .CKAccountChanged, object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in self?.verifiedAccount = nil }
+        }
     }
     func attach(_ store: ShiftStore) { self.store = store }
     func localSaved() {
@@ -81,9 +88,13 @@ struct CloudSharePresentation: Identifiable {
         enabled = true; UserDefaults.standard.set(true, forKey: "hotelShift.cloud.enabled")
         await synchronize()
     }
-    private func account() async throws -> String {
-        guard try await container.accountStatus() == .available else { throw CloudSyncError.message("iPadの設定でiCloudにサインインしてください。iCloudを利用できません。") }
-        return try await container.userRecordID().recordName
+    private func account(fresh: Bool = false) async throws -> String {
+        if !fresh, let verifiedAccount, Date().timeIntervalSince(verifiedAccount.checkedAt) < 600 { return verifiedAccount.id }
+        verifiedAccount = nil
+        guard try await container.accountStatus() == .available else { throw CloudSyncError.message("端末の設定でiCloudにサインインしてください。iCloudを利用できません。") }
+        let id = try await container.userRecordID().recordName
+        verifiedAccount = (id, Date())
+        return id
     }
     private func database(_ target: CloudSyncTarget) -> CKDatabase { target.shared ? container.sharedCloudDatabase : container.privateCloudDatabase }
     private func hash(_ bytes: Data) async -> String {
@@ -207,7 +218,7 @@ struct CloudSharePresentation: Identifiable {
             if let readyPresentation { shareSheet = readyPresentation }
         }
         do {
-            let user = try await account()
+            let user = try await account(fresh: true)
             if let target {
                 guard target.account == user else { throw CloudSyncError.message("Apple Accountが違います。同期先を確認してください。") }
                 let db = database(target)
@@ -249,7 +260,7 @@ struct CloudSharePresentation: Identifiable {
         busy = true
         do {
             guard metadata.containerIdentifier == Self.containerID else { throw CloudSyncError.message("このアプリの招待リンクではありません。") }
-            let user = try await account()
+            let user = try await account(fresh: true)
             let oldTarget = target
             _ = try await container.accept(metadata)
             guard let id = metadata.hierarchicalRootRecordID else { throw CloudSyncError.message("共有の参照先を確認できません。招待リンクを作成し直してください。") }
@@ -268,8 +279,27 @@ struct CloudSharePresentation: Identifiable {
         }
     }
     func report(_ error: Error) {
-        status = "同期できません：\(error.localizedDescription)"
-        if let error = error as? CKError, error.code == .serverRecordChanged { status = "他の端末が更新しました。「今すぐ同期」で再確認してください" }
+        guard let error = error as? CKError else { status = "同期できません：\(error.localizedDescription)"; return }
+        // FIXED561: Plain-language guidance instead of raw CloudKit error text. Local data is kept in every case.
+        switch error.code {
+        case .serverRecordChanged:
+            status = "他の端末が更新しました。「今すぐ同期」で再確認してください"
+        case .networkUnavailable, .networkFailure:
+            status = "インターネットに接続できません。通信が戻ると自動で同期します（端末のデータは保持しています）"
+        case .serviceUnavailable, .requestRateLimited, .zoneBusy:
+            status = "iCloudが混み合っています。しばらくすると自動で再試行します"
+        case .notAuthenticated:
+            verifiedAccount = nil
+            status = "端末の設定でiCloudにサインインしてください"
+        case .quotaExceeded:
+            status = "iCloudの空き容量が不足しています。容量を確保してから同期してください"
+        case .unknownItem, .zoneNotFound, .userDeletedZone:
+            status = "同期先の共有が見つかりません。共有が削除された可能性があります。招待リンクから参加し直してください"
+        case .permissionFailure, .participantMayNeedVerification:
+            status = "この共有を編集する権限がありません。共有の作成者に確認してください"
+        default:
+            status = "同期できません：\(error.localizedDescription)"
+        }
     }
 }
 enum CloudSyncError: LocalizedError {

@@ -273,13 +273,15 @@ enum RequestInboxTools {
         }
         return partial.count == 1 ? partial[0].id : nil
     }
+    // FIXED561: Compile the date pattern once instead of on every pasted message.
+    private static let dayPattern = try! NSRegularExpression(pattern: #"(?<![\d/])(?:(\d{4})\s*(?:年|/)\s*)?(?:(\d{1,2})\s*(?:/|月)\s*)?(\d{1,2})(?!\d)\s*日?"#)
     static func dates(_ text: String, month: Date) -> [String] {
         let cal = Calendar(identifier: .gregorian)
         let baseYear = cal.component(.year, from: month), baseMonth = cal.component(.month, from: month)
         var s = text.applyingTransform(.fullwidthToHalfwidth, reverse: false) ?? text
         for (a,b) in [("〜","~"),("～","~"),("−","-"),("―","-"),("から","~")] { s = s.replacingOccurrences(of:a,with:b) }
         s = s.replacingOccurrences(of: #"\d{1,2}:\d{2}"#, with: " ", options: .regularExpression)
-        let re = try! NSRegularExpression(pattern: #"(?<![\d/])(?:(\d{4})\s*(?:年|/)\s*)?(?:(\d{1,2})\s*(?:/|月)\s*)?(\d{1,2})(?!\d)\s*日?"#)
+        let re = Self.dayPattern
         let ns = s as NSString
         var year = baseYear, mo = baseMonth, result = Set<String>()
         var previous: (date: Date, end: Int)?

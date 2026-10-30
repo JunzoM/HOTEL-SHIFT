@@ -66,6 +66,7 @@ final class ShiftStore: ObservableObject {
         let index: ShiftLookupIndex
     }
     nonisolated static func prepareInitialLoad() -> InitialLoad {
+        pruneStaleExports()
         let isFreshInstall = !FileManager.default.fileExists(atPath: Self.defaultFileURL.path)
         let initialData: ShiftData
         var failedToLoadExistingData = false
@@ -169,8 +170,20 @@ final class ShiftStore: ObservableObject {
         return data.assignments[i]
     }
     func hasApprovedLeave(staffID: UUID, dateKey: String) -> Bool {
+        approvedRequest(staffID: staffID, dateKey: dateKey) != nil
+    }
+    // FIXED561: Cell lookups use the index instead of scanning every request/shift row.
+    func approvedRequest(staffID: UUID, dateKey: String) -> ShiftRequest? {
         let requests = data.requests ?? []
-        return (lookup.requestsByCell[.init(location: selectedLocationID, staff: staffID, day: dateKey)] ?? []).contains { requests[$0].status == .approved }
+        return (lookup.requestsByCell[.init(location: selectedLocationID, staff: staffID, day: dateKey)] ?? [])
+            .lazy.map { requests[$0] }.first { $0.status == .approved }
+    }
+    // Same result as firstIndex(where: location/staff/day): the index keeps the first row per cell.
+    private func assignmentIndex(location: UUID, staffID: UUID, dateKey: String) -> Int? {
+        lookup.assignmentByCell[.init(location: location, staff: staffID, day: dateKey)]
+    }
+    private func assignmentIndices(location: UUID, staffID: UUID, dateKey: String) -> [Int] {
+        (lookup.assignmentsByDay[.init(location: location, value: dateKey)] ?? []).filter { data.assignments[$0].staffID == staffID }
     }
     var selectedRequestsUnsorted: [ShiftRequest] {
         let requests = data.requests ?? []
@@ -308,7 +321,7 @@ final class ShiftStore: ObservableObject {
         var next = data
         let key = date.shiftDateKey
         let currentWage = next.staff.first(where: { $0.id == staffID })?.hourlyWage
-        if let index = next.assignments.firstIndex(where: { $0.locationID == selectedLocationID && $0.staffID == staffID && $0.dateKey == key }) {
+        if let index = assignmentIndex(location: selectedLocationID, staffID: staffID, dateKey: key) {
             if next.assignments[index].type == type && (note == nil || next.assignments[index].note == note) { return }
             if next.assignments[index].type != type {
                 next.assignments[index].patternNameSnapshot = nil
@@ -340,7 +353,7 @@ final class ShiftStore: ObservableObject {
         let safeEnd = min(max(endMinutes, safeStart + 15), 2879)
         let safeBreak = breakMinutes.map { min(max(0, $0), safeEnd - safeStart) }
         let safeBreakStart = breakStartMinutes.map { min(max(safeStart, $0), safeEnd - (safeBreak ?? 0)) }
-        if let index = next.assignments.firstIndex(where: { $0.locationID == selectedLocationID && $0.staffID == staffID && $0.dateKey == key }) {
+        if let index = assignmentIndex(location: selectedLocationID, staffID: staffID, dateKey: key) {
             let old = next.assignments[index]
             if old.customStartMinutes == safeStart && old.customEndMinutes == safeEnd && old.customBreakMinutes == safeBreak && old.customBreakStartMinutes == safeBreakStart { return }
             if next.assignments[index].hourlyWageSnapshot == nil { next.assignments[index].hourlyWageSnapshot = currentWage }
@@ -365,11 +378,11 @@ final class ShiftStore: ObservableObject {
         guard data.staff.contains(where: { $0.id == staffID && $0.locationID == locationID && $0.isActive }) else { throw DayShiftEditError.unavailable }
         guard span.start >= 0, span.start < 1440, span.end >= span.start + 15, span.end <= 2879 else { throw DayShiftEditError.invalid }
         let key = date.shiftDateKey
-        let index = data.assignments.firstIndex { $0.locationID == locationID && $0.staffID == staffID && $0.dateKey == key }
+        let index = assignmentIndex(location: locationID, staffID: staffID, dateKey: key)
         let current = index.map { data.assignments[$0] }
         guard current == expected else { throw DayShiftEditError.changed }
         guard current == nil || DayTimelineMath.span(current) != nil else { throw DayShiftEditError.changed }
-        if !allowLeave && selectedRequestsUnsorted.contains(where: { $0.staffID == staffID && $0.dateKey == key && $0.status == .approved }) {
+        if !allowLeave && hasApprovedLeave(staffID: staffID, dateKey: key) {
             throw DayShiftEditError.leave
         }
         let wage = data.staff.first { $0.id == staffID }?.hourlyWage
@@ -394,12 +407,12 @@ final class ShiftStore: ObservableObject {
         guard !storageWriteBlocked else { throw DayShiftEditError.storage }
         guard selectedLocationID == change.locationID else { throw DayShiftEditError.changed }
         guard data.staff.contains(where: { $0.id == change.staffID && $0.locationID == change.locationID && $0.isActive }) else { throw DayShiftEditError.unavailable }
-        let index = data.assignments.firstIndex { $0.locationID == change.locationID && $0.staffID == change.staffID && $0.dateKey == change.dateKey }
+        let index = assignmentIndex(location: change.locationID, staffID: change.staffID, dateKey: change.dateKey)
         let current = index.map { data.assignments[$0] }
         let expected = undo ? change.after : change.before
         let target = undo ? change.before : change.after
         guard current == expected else { throw DayShiftEditError.changed }
-        if DayTimelineMath.span(target) != nil && selectedRequestsUnsorted.contains(where: { $0.staffID == change.staffID && $0.dateKey == change.dateKey && $0.status == .approved }) {
+        if DayTimelineMath.span(target) != nil && hasApprovedLeave(staffID: change.staffID, dateKey: change.dateKey) {
             throw DayShiftEditError.leave
         }
         var updated = data.assignments
@@ -639,23 +652,26 @@ final class ShiftStore: ObservableObject {
             let staffID: UUID
             let dateKey: String
         }
-        let approved = Set((data.requests ?? []).lazy.filter {
-            $0.locationID == self.selectedLocationID && $0.status == .approved
-        }.map { StaffDay(staffID: $0.staffID, dateKey: $0.dateKey) })
+        // FIXED561: Visit only approved request cells, not every shift in the history.
+        let requests = data.requests ?? []
+        let approved = Set((lookup.requestsByLocation[selectedLocationID] ?? []).lazy
+            .map { requests[$0] }.filter { $0.status == .approved }
+            .map { StaffDay(staffID: $0.staffID, dateKey: $0.dateKey) })
         let names = Dictionary(selectedStaff.map { ($0.id, $0.name) }, uniquingKeysWith: { first, _ in first })
-        var seen = Set<StaffDay>()
         var conflicts: [LeaveShiftConflict] = []
-        for assignment in data.assignments where assignment.locationID == selectedLocationID &&
-            assignment.type != .off && assignment.type != .paidLeave && assignment.type != .afterNight {
-            let key = StaffDay(staffID: assignment.staffID, dateKey: assignment.dateKey)
-            guard approved.contains(key), seen.insert(key).inserted,
-                  let name = names[assignment.staffID] else { continue }
+        for key in approved {
+            guard let name = names[key.staffID] else { continue }
+            // The first working row of the cell, in stored order, as before.
+            guard let assignment = assignmentIndices(location: selectedLocationID, staffID: key.staffID, dateKey: key.dateKey)
+                .lazy.map({ self.data.assignments[$0] })
+                .first(where: { $0.type != .off && $0.type != .paidLeave && $0.type != .afterNight }) else { continue }
             conflicts.append(LeaveShiftConflict(staffID: assignment.staffID,
                 staffName: name, dateKey: assignment.dateKey, shiftType: assignment.type))
         }
         return conflicts.sorted {
             if $0.dateKey != $1.dateKey { return $0.dateKey < $1.dateKey }
-            return $0.staffName < $1.staffName
+            if $0.staffName != $1.staffName { return $0.staffName < $1.staffName }
+            return $0.staffID.uuidString < $1.staffID.uuidString
         }
     }
 
@@ -748,11 +764,14 @@ final class ShiftStore: ObservableObject {
             let staffID: UUID
             let dateKey: String
         }
-        var occupied = Set(data.assignments.filter { $0.locationID == selectedLocationID }
+        // FIXED561: Only the requested days (at most 366) can collide; read them from the day index.
+        let rangeKeys = Set((0...dayCount).compactMap { cal.date(byAdding: .day, value: $0, to: first)?.shiftDateKey })
+        var occupied = Set(lookup.assignmentPositions(location: selectedLocationID, days: rangeKeys)
+            .map { StaffDay(staffID: data.assignments[$0].staffID, dateKey: data.assignments[$0].dateKey) })
+        let requests = data.requests ?? []
+        let approvedLeave = Set((lookup.requestsByLocation[selectedLocationID] ?? []).lazy
+            .map { requests[$0] }.filter { $0.status == .approved && rangeKeys.contains($0.dateKey) }
             .map { StaffDay(staffID: $0.staffID, dateKey: $0.dateKey) })
-        let approvedLeave = Set((data.requests ?? []).filter {
-            $0.locationID == selectedLocationID && $0.status == .approved
-        }.map { StaffDay(staffID: $0.staffID, dateKey: $0.dateKey) })
         // FIXED210: A seasonal rule reserves its matching staff/day even if the
         // ordinary weekly rule is applied first. No existing shift is changed.
         let seasonalPatterns = (data.patterns ?? []).filter {
@@ -850,8 +869,10 @@ final class ShiftStore: ObservableObject {
     func clearShift(staffID: UUID, date: Date) {
         guard data.staff.contains(where: { $0.id == staffID && $0.locationID == selectedLocationID }) else { return }
         let key = date.shiftDateKey
-        guard data.assignments.contains(where: { $0.locationID == selectedLocationID && $0.staffID == staffID && $0.dateKey == key }) else { return }
-        data.assignments.removeAll { $0.locationID == selectedLocationID && $0.staffID == staffID && $0.dateKey == key }
+        // Remove every legacy duplicate of the cell, found through the day index.
+        let positions = Set(assignmentIndices(location: selectedLocationID, staffID: staffID, dateKey: key))
+        guard !positions.isEmpty else { return }
+        data.assignments = data.assignments.enumerated().compactMap { positions.contains($0.offset) ? nil : $0.element }
     }
 
     func exportCSV() async -> URL? {
@@ -1464,10 +1485,10 @@ final class ShiftStore: ObservableObject {
               item.endMinutes <= 2879, item.breakMinutes >= 0,
               item.breakMinutes <= item.endMinutes - item.startMinutes else { throw DayShiftEditError.invalid }
         let key = date.shiftDateKey
-        let matches = data.assignments.indices.filter { data.assignments[$0].staffID == person.id && data.assignments[$0].locationID == selectedLocationID && data.assignments[$0].dateKey == key }
+        let matches = assignmentIndices(location: selectedLocationID, staffID: person.id, dateKey: key)
         let current = matches.first.map { data.assignments[$0] }
         guard matches.count <= 1, current == expectedAssignment else { throw DayShiftEditError.changed }
-        if !allowLeave && selectedRequestsUnsorted.contains(where: { $0.staffID == person.id && $0.dateKey == key && $0.status == .approved }) { throw DayShiftEditError.leave }
+        if !allowLeave && hasApprovedLeave(staffID: person.id, dateKey: key) { throw DayShiftEditError.leave }
         var next = current ?? ShiftAssignment(staffID: person.id, dateKey: key, type: .day, locationID: selectedLocationID, hourlyWageSnapshot: person.hourlyWage)
         if DayTimelineMath.span(next) == nil { next.type = .day }
         next.customStartMinutes = item.startMinutes; next.customEndMinutes = item.endMinutes
@@ -1496,7 +1517,7 @@ final class ShiftStore: ObservableObject {
         guard staff.locationID == selectedLocationID,
               data.staff.contains(where: { $0.id == staff.id && $0.locationID == selectedLocationID }) else { return nil }
         return StaffDeletionImpact(
-            assignments: data.assignments.filter { $0.staffID == staff.id && $0.locationID == selectedLocationID }.count,
+            assignments: (lookup.assignmentsByLocation[selectedLocationID] ?? []).reduce(0) { $0 + (data.assignments[$1].staffID == staff.id ? 1 : 0) },
             requests: (data.requests ?? []).filter { $0.staffID == staff.id && $0.locationID == selectedLocationID }.count,
             patterns: (data.patterns ?? []).filter { $0.staffID == staff.id && $0.locationID == selectedLocationID }.count,
             personalWorkTimes: (data.personalWorkTimes ?? []).filter { $0.staffID == staff.id && $0.locationID == selectedLocationID }.count
@@ -1531,8 +1552,9 @@ final class ShiftStore: ObservableObject {
     }
 
     func addLocation(name: String) {
-        guard !name.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        let location = HotelLocation(name: name)
+        let cleaned = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !cleaned.isEmpty else { return }
+        let location = HotelLocation(name: cleaned)
         data.locations.append(location)
         selectedLocationID = location.id
     }
@@ -1884,6 +1906,46 @@ final class ShiftStore: ObservableObject {
             finishSave(bytes, revision: pdfRevision)
         } catch {
             storageWarning = "変更内容を端末に保存できませんでした。空き容量を確認し、アプリを終了せずに再度保存をお試しください。"
+        }
+    }
+
+    // FIXED561: Leaving the app must not freeze the UI thread while a large history is encoded.
+    // Encode/write off the main actor under a background-task assertion; fall back to the
+    // synchronous flush if the system is about to suspend us or the async write did not land.
+    private var backgroundSaveTaskID: UIBackgroundTaskIdentifier = .invalid
+    func persistForBackground() {
+        pendingSave?.cancel(); pendingSave = nil
+        guard !storageWriteBlocked, needsSave, backgroundSaveTaskID == .invalid else { return }
+        backgroundSaveTaskID = UIApplication.shared.beginBackgroundTask(withName: "HOTEL SHIFT save") { [weak self] in
+            MainActor.assumeIsolated {
+                self?.flushPendingSave()
+                self?.endBackgroundSave()
+            }
+        }
+        Task { [weak self] in
+            guard let self else { return }
+            _ = await self.persistSnapshot()
+            if self.needsSave { self.flushPendingSave() }
+            self.endBackgroundSave()
+        }
+    }
+    private func endBackgroundSave() {
+        guard backgroundSaveTaskID != .invalid else { return }
+        UIApplication.shared.endBackgroundTask(backgroundSaveTaskID)
+        backgroundSaveTaskID = .invalid
+    }
+
+    // FIXED561: Shared PDF/CSV/JSON exports are written to tmp with unique names and were never
+    // removed. Delete our own export files older than a day so the sandbox does not grow forever.
+    nonisolated static func pruneStaleExports(olderThan age: TimeInterval = 86_400) {
+        let manager = FileManager.default
+        let keys: [URLResourceKey] = [.contentModificationDateKey, .isRegularFileKey]
+        guard let files = try? manager.contentsOfDirectory(at: manager.temporaryDirectory, includingPropertiesForKeys: keys) else { return }
+        let cutoff = Date().addingTimeInterval(-age)
+        for url in files where ["pdf", "csv", "json"].contains(url.pathExtension.lowercased()) {
+            guard let values = try? url.resourceValues(forKeys: Set(keys)), values.isRegularFile == true,
+                  let modified = values.contentModificationDate, modified < cutoff else { continue }
+            try? manager.removeItem(at: url)
         }
     }
 }
