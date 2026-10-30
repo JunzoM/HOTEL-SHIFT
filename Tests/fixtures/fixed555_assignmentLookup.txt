@@ -1,0 +1,11 @@
+    private func assignmentLookup(for dates: [Date]) -> [UUID: [String: ShiftAssignment]] {
+        let keys = Set(dates.map(\.shiftDateKey))
+        var result: [UUID: [String: ShiftAssignment]] = [:]
+        for assignment in store.data.assignments
+            where assignment.locationID == store.selectedLocationID && keys.contains(assignment.dateKey) {
+            if result[assignment.staffID]?[assignment.dateKey] == nil {
+                result[assignment.staffID, default: [:]][assignment.dateKey] = assignment
+            }
+        }
+        return result
+    }

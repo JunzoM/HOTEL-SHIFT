@@ -1,0 +1,11 @@
+{
+  "environment" : "Same iPad Pro Simulator, debug build, programmatic UIScrollView animation; not physical touch\/FPS",
+  "final_offset" : 0,
+  "frames_over_25ms" : 7,
+  "header_error_points" : null,
+  "max_frame_interval_ms" : 416.04583332082257,
+  "maximum_header_error_points" : null,
+  "mean_frame_interval_ms" : 94.166666668024845,
+  "p95_frame_interval_ms" : 416.04583332082257,
+  "samples" : 20
+}

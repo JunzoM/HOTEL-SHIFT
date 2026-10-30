@@ -1,0 +1,28 @@
+{
+  "async_actor_beats" : 68,
+  "async_actor_max_gap_ms" : 3.1272500054910779,
+  "async_encode_write_elapsed_ms" : 165.06558330729604,
+  "checks" : [
+    "index-equivalence",
+    "duplicate-order",
+    "cache-invalidation",
+    "photo-JSON-roundtrip",
+    "late-stale-writes-rejected",
+    "restore-safety-copy",
+    "write-error-propagation",
+    "automatic-copy-retention",
+    "manual-and-user-copies-preserved"
+  ],
+  "environment" : "Optimized macOS Swift microbenchmark; not physical iPad FPS",
+  "index_build_ms" : 25.821566674858332,
+  "json_bytes" : 37028433,
+  "lookup_775_indexed_ms" : 0.81912083551287651,
+  "lookup_775_linear_ms" : 29.587433335836977,
+  "lookup_speedup" : 36.120962931325494,
+  "photo_payload_MiB" : 25,
+  "render_rebuilds_per_1000_unchanged_queries" : 1,
+  "shifts" : 6100,
+  "staff" : 100,
+  "sync_actor_max_gap_ms" : 175.13733333908021,
+  "sync_encode_write_ms" : 175.08716665906832
+}

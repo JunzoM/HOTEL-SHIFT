@@ -1,0 +1,24 @@
+{
+  "20_unchanged_snapshot_reads_ms" : 0.021666695829480886,
+  "100_portrait_cache_hits_ms" : 91.263666632585227,
+  "async_store_save_ms" : 578.15849996404722,
+  "checks" : [
+    "single-notification-shift-edit",
+    "bulk-and-undo",
+    "index-refresh",
+    "store-isolation",
+    "12MP-downsample",
+    "100-valid-distinct-JPEGs",
+    "portrait-cache",
+    "async-durable-save",
+    "snapshot-cache",
+    "UIKit-header-link-and-reset"
+  ],
+  "decode_100_distinct_portraits_ms" : 1377.6893333415501,
+  "environment" : "iPad Pro Simulator; debug build; not a physical-device FPS claim",
+  "source_pixels" : 12192768,
+  "thumbnail_first_decode_ms" : 226.8197083612904,
+  "thumbnail_pixels" : 12288,
+  "ui_actor_heartbeat_count" : 99,
+  "ui_actor_max_gap_during_save_ms" : 25.908541691023856
+}

@@ -1,0 +1,20 @@
+{
+  "version": "FIXED489",
+  "change": "Request bulk toolbar centered and sized to match IntegratedScheduleGrid.selectionBar",
+  "dimensions": {
+    "height": 64.4,
+    "maximumWidth": 1064,
+    "font": 16.8,
+    "buttonMinimumHeight": 42,
+    "buttonHorizontalPadding": 14,
+    "spacing": 16.8,
+    "innerPadding": 11.2
+  },
+  "checks": {
+    "syntax": "15/15 passed",
+    "dimension_comparison": "passed",
+    "other_request_workflows": "unchanged from FIXED488",
+    "build": "iOS Simulator arm64 passed"
+  },
+  "visual": "No new simulator screenshot; FIXED488 screenshot predates this size change"
+}

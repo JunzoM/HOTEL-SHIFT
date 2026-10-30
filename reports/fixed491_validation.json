@@ -1,0 +1,15 @@
+{
+  "version": "FIXED491",
+  "changes": [
+    "Compact current-date row restored on requests and shift workspaces",
+    "Timeline updates every minute",
+    "Current user guides consolidated into README.md; future releases update this one file"
+  ],
+  "validation": {
+    "swift_syntax": "15/15 passed",
+    "build": "iOS Simulator arm64 succeeded",
+    "README_count": "one README.md; obsolete version-named guides removed",
+    "source_scope": "Only ContentView.swift changed; shift/requests workflows, bulk toolbar and PDF code unchanged"
+  },
+  "visual": "No new simulator screenshot for this shared header-only change"
+}

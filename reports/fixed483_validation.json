@@ -1,0 +1,26 @@
+{
+  "version": "FIXED483",
+  "base": "FIXED482",
+  "changes": [
+    "shared leading anchor for Edit and Pattern",
+    "undo/redo and period arrows at 18pt (1.5x); larger hit widths; secondary group shifted inward",
+    "bulk toolbar container and its content centered, keeping FIXED482 scale 1.4",
+    "locale-independent M/d table dates and slash week/day period labels"
+  ],
+  "full_ios_simulator_build": "passed arm64 and x86_64",
+  "syntax_files_passed": 15,
+  "runtime_tests": [
+    "FIXED478 with new 10/1 date-label check",
+    "FIXED479 shared toolbar controls",
+    "FIXED477 daily editing",
+    "FIXED455/460 PDF regressions"
+  ],
+  "visual": {
+    "screen": "reports/fixed483_alignment.png",
+    "device": "dedicated iPad Pro 13-inch M5 iOS 27 simulator",
+    "orientation": "portrait",
+    "observed": "Edit and Pattern have the same left edge; toolbar content centered; larger arrows and M/d dates visible",
+    "fixture": "separate validation-only copy starts directly in weekly edit mode with three selected cells; distributed source retains normal Home/locked start",
+    "physical_device": "not tested"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": "FIXED484",
+  "build": "Full iOS Simulator build succeeded; final visual harness build succeeded",
+  "tests": {
+    "verify_fixed484": "passed",
+    "verify_fixed477_478_479": "passed",
+    "verify_fixed455_460": "passed",
+    "swift_syntax": "15 files passed",
+    "pdf_name_layout": "unchanged from FIXED483"
+  },
+  "visual": {
+    "image": "fixed484_staff_detail.png",
+    "observed": "Staff details with live name, status, four tabs and basic/employment-date rows displayed over locked monthly schedule",
+    "method": "Temporary validation copy opens first staff on appear; production has tap routes and normal launch state",
+    "limitations": "Physical taps and device gestures not manually exercised"
+  },
+  "scope_document": "FIXED484_スタッフ詳細統合.md"
+}

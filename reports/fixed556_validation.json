@@ -1,0 +1,11 @@
+{
+  "version": "FIXED556",
+  "data_rows": 548000,
+  "index_mutations": 180,
+  "pdf_async_cases": 12,
+  "builds": {
+    "iOS Simulator": "passed",
+    "Mac Catalyst": "passed"
+  },
+  "visual_verification": "not performed"
+}

@@ -1,0 +1,27 @@
+{
+  "version": "FIXED494",
+  "clarification": "User specified the three buttons belong to Requests only; Shift remains identical to FIXED493.",
+  "changes": [
+    "Requests month centered above QR/receive/add; three actions centered with balanced ellipsis menu on the right",
+    "Request action labels/menu use matching 42pt height and rounded rectangular style",
+    "Output tabs form one horizontal row",
+    "Remove decorative top icons and introductory text from Output and Backup, retaining actual card actions"
+  ],
+  "checks": {
+    "syntax": "15/15 passed",
+    "build": "Final iOS Simulator arm64 succeeded",
+    "scope": "Only StaffAndOtherViews.swift UI changed; data/model/store/common header and Shift sources unchanged",
+    "README": "one README.md maintained"
+  },
+  "visual": {
+    "device": "Dedicated iPad Pro 13-inch M5 Simulator, landscape",
+    "images": [
+      "fixed494_requests_actions.png",
+      "fixed494_output_tabs.png",
+      "fixed494_backup_header.png"
+    ],
+    "observed": "Requests: three centered actions below month, same-shaped ellipsis to their right. Output: all three tabs in one row with no decorative header. Backup: cards/actions remain, decorative header removed.",
+    "method": "Separate copy uses initial-page launch flags and landscape orientation; production still starts on Home.",
+    "limitations": "Manual taps, exports and restore were not re-run for these layout-only edits."
+  }
+}

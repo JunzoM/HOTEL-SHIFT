@@ -1,0 +1,26 @@
+{
+  "version": "FIXED479",
+  "base": "FIXED478",
+  "approved_reference": "reports/fixed479_ui_proposal.png",
+  "full_ios_simulator_build": "passed arm64 and x86_64",
+  "swift_syntax_files": 14,
+  "runtime_tests": [
+    "FIXED479 shared toolbar state/reset/repeated commands",
+    "FIXED478 grid/batch/copy and selected-source-only copy",
+    "FIXED477 daily timeline/storage",
+    "FIXED455 and FIXED460 PDF regressions"
+  ],
+  "storage_models_pdf_renderer": "unchanged from FIXED478",
+  "visual_check": {
+    "device": "isolated iPad Pro 13-inch M5 iOS 27 simulator",
+    "orientation": "portrait",
+    "method": "validation-only copy opens the shipping shift views directly; selected-state fixture only in that copy",
+    "screens": [
+      "reports/fixed479_ipad_month.png",
+      "reports/fixed479_ipad_week_selection.png"
+    ],
+    "observed": "two header rows fit, weekly period controls do not overlap, selected cells and bottom action bar visible, bottom bar reserves space rather than covering table",
+    "physical_touch_gestures": "not tested"
+  },
+  "shipping_app": "normal home start and edit lock retained; no validation fixture included"
+}

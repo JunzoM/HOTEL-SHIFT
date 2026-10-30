@@ -1,0 +1,37 @@
+    func decideRequestBatch(expected: [ShiftRequest], staffSnapshot: [StaffMember], assignmentSnapshot: [ShiftAssignment], locationID: UUID, status: ShiftRequestStatus, alsoOff: Bool) throws {
+        guard !storageWriteBlocked else { throw RequestWorkflowError(message: "保存が保護されています。バックアップ・復元画面を確認してください。") }
+        guard locationID == selectedLocationID, !expected.isEmpty, Set(expected.map(\.id)).count == expected.count else { throw RequestWorkflowError(message: "店舗または対象が変わりました。再選択してください。") }
+        guard selectedStaff == staffSnapshot, !alsoOff || selectedAssignments == assignmentSnapshot else { throw RequestWorkflowError(message: "スタッフまたはシフトが更新されました。最新の一覧から再確認してください。") }
+        var next = data
+        var requests = next.requests ?? []
+        for request in expected {
+            guard request.locationID == locationID, requests.contains(request),
+                  staffSnapshot.contains(where: { $0.id == request.staffID }) else { throw RequestWorkflowError(message: "申請が更新・削除されました。最新の一覧から再確認してください。") }
+        }
+        let now = Date()
+        for request in expected {
+            guard let index = requests.firstIndex(where: { $0.id == request.id }) else { continue }
+            if requests[index].status != status { requests[index].status = status; requests[index].updatedAt = now }
+        }
+        if status == .approved && alsoOff {
+            for request in expected {
+                let indices = next.assignments.indices.filter { next.assignments[$0].locationID == locationID && next.assignments[$0].staffID == request.staffID && next.assignments[$0].dateKey == request.dateKey }
+                guard indices.count <= 1 else { throw RequestWorkflowError(message: "同じ日に複数のシフトがあります。シフト画面で整理してください。") }
+                if let index = indices.first {
+                    // Keep existing paid leave and rest records intact.
+                    if [.off, .paidLeave, .afterNight].contains(next.assignments[index].type) { continue }
+                    next.assignments[index].type = .off
+                    next.assignments[index].customStartMinutes = nil
+                    next.assignments[index].customEndMinutes = nil
+                    next.assignments[index].customBreakMinutes = nil
+                    next.assignments[index].customBreakStartMinutes = nil
+                    next.assignments[index].patternNameSnapshot = nil
+                } else {
+                    next.assignments.append(ShiftAssignment(staffID: request.staffID, dateKey: request.dateKey, type: .off, locationID: locationID))
+                }
+            }
+        }
+        next.requests = requests
+        data = next
+    }
+

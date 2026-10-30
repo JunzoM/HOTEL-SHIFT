@@ -1,0 +1,13 @@
+{
+  "version": "FIXED555",
+  "previous_pdf_regression_cases": 10,
+  "pdf_regression_cases": 12,
+  "budget_checks": 32,
+  "filename_cases_with_file_writes": 9,
+  "before_fix": "same failed preparation rendered twice",
+  "builds": {
+    "iOS Simulator": "passed (final source rebuilt)",
+    "Mac Catalyst": "passed"
+  },
+  "visual_verification": "not performed"
+}

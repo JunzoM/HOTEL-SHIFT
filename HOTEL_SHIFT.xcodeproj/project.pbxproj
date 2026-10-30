@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000020 /* HOTELSHIFTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000010 /* HOTELSHIFTApp.swift */; };
+		A10000000000000000000021 /* ShiftModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* ShiftModels.swift */; };
+		A10000000000000000000022 /* ShiftStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* ShiftStore.swift */; };
+		A10000000000000000000023 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* ContentView.swift */; };
+		A10000000000000000000024 /* ShiftCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* ShiftCalendarView.swift */; };
+		A10000000000000000000025 /* StaffAndOtherViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* StaffAndOtherViews.swift */; };
+		A10000000000000000000026 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* Assets.xcassets */; };
+		A10000000000000000000027 /* CSVHistoryFilterValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000018 /* CSVHistoryFilterValidator.swift */; };
+		A10000000000000000000028 /* CSVHistoryFeedbackPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000019 /* CSVHistoryFeedbackPolicy.swift */; };
+		A10000000000000000000029 /* CSVHistoryFeedbackPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001A /* CSVHistoryFeedbackPresentation.swift */; };
+		A1000000000000000000002A /* DayTimelineMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001B /* DayTimelineMath.swift */; };
+		A1000000000000000000002B /* IntegratedDayTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001C /* IntegratedDayTimeline.swift */; };
+		A1000000000000000000002C /* ScheduleGridSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001D /* ScheduleGridSupport.swift */; };
+		A1000000000000000000002D /* IntegratedScheduleGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001E /* IntegratedScheduleGrid.swift */; };
+		A1000000000000000000002E /* ShiftWorkspaceControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001F /* ShiftWorkspaceControls.swift */; };
+		A1000000000000000000002F /* ScheduleLinkedHorizontalScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000050 /* ScheduleLinkedHorizontalScroll.swift */; };
+		A90000000000000000000061 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000060 /* CloudSync.swift */; };
+		A90000000000000000000071 /* ShiftLookupIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000070; };
+		A90000000000000000000073 /* ShiftPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000072; };
+		A90000000000000000000075 /* ShiftPhotoProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000074; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000010 /* HOTELSHIFTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HOTELSHIFTApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000011 /* ShiftModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftModels.swift; sourceTree = "<group>"; };
+		A10000000000000000000012 /* ShiftStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftStore.swift; sourceTree = "<group>"; };
+		A10000000000000000000013 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A10000000000000000000014 /* ShiftCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftCalendarView.swift; sourceTree = "<group>"; };
+		A10000000000000000000015 /* StaffAndOtherViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffAndOtherViews.swift; sourceTree = "<group>"; };
+		A10000000000000000000016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000000000000000000017 /* HOTEL_SHIFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HOTEL_SHIFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000018 /* CSVHistoryFilterValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVHistoryFilterValidator.swift; sourceTree = "<group>"; };
+		A10000000000000000000019 /* CSVHistoryFeedbackPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVHistoryFeedbackPolicy.swift; sourceTree = "<group>"; };
+		A1000000000000000000001A /* CSVHistoryFeedbackPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVHistoryFeedbackPresentation.swift; sourceTree = "<group>"; };
+		A1000000000000000000001B /* DayTimelineMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTimelineMath.swift; sourceTree = "<group>"; };
+		A1000000000000000000001C /* IntegratedDayTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegratedDayTimeline.swift; sourceTree = "<group>"; };
+		A1000000000000000000001D /* ScheduleGridSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleGridSupport.swift; sourceTree = "<group>"; };
+		A1000000000000000000001E /* IntegratedScheduleGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegratedScheduleGrid.swift; sourceTree = "<group>"; };
+		A1000000000000000000001F /* ShiftWorkspaceControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftWorkspaceControls.swift; sourceTree = "<group>"; };
+		A90000000000000000000050 /* ScheduleLinkedHorizontalScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleLinkedHorizontalScroll.swift; sourceTree = "<group>"; };
+		A90000000000000000000060 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
+		A90000000000000000000070 /* ShiftLookupIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftLookupIndex.swift; sourceTree = "<group>"; };
+		A90000000000000000000072 /* ShiftPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftPersistence.swift; sourceTree = "<group>"; };
+		A90000000000000000000074 /* ShiftPhotoProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftPhotoProcessing.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10000000000000000000031 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10000000000000000000001 /* HOTEL_SHIFT */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000010 /* HOTELSHIFTApp.swift */,
+				A10000000000000000000002 /* Models */,
+				A10000000000000000000003 /* Services */,
+				A10000000000000000000004 /* Views */,
+				A10000000000000000000016 /* Assets.xcassets */,
+			);
+			path = HOTEL_SHIFT;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000002 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000011 /* ShiftModels.swift */,
+				A90000000000000000000070 /* ShiftLookupIndex.swift */,
+				A1000000000000000000001B /* DayTimelineMath.swift */,
+				A1000000000000000000001D /* ScheduleGridSupport.swift */,
+				A10000000000000000000019 /* CSVHistoryFeedbackPolicy.swift */,
+				A1000000000000000000001A /* CSVHistoryFeedbackPresentation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000003 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000012 /* ShiftStore.swift */,
+				A90000000000000000000074 /* ShiftPhotoProcessing.swift */,
+				A90000000000000000000072 /* ShiftPersistence.swift */,
+				A90000000000000000000060 /* CloudSync.swift */,
+				A10000000000000000000018 /* CSVHistoryFilterValidator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000013 /* ContentView.swift */,
+				A10000000000000000000014 /* ShiftCalendarView.swift */,
+				A1000000000000000000001C /* IntegratedDayTimeline.swift */,
+				A1000000000000000000001E /* IntegratedScheduleGrid.swift */,
+				A1000000000000000000001F /* ShiftWorkspaceControls.swift */,
+				A90000000000000000000050 /* ScheduleLinkedHorizontalScroll.swift */,
+				A10000000000000000000015 /* StaffAndOtherViews.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000006 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000017 /* HOTEL_SHIFT.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000007 = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000001 /* HOTEL_SHIFT */,
+				A10000000000000000000006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000000000000000000040 /* HOTEL_SHIFT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000061 /* Build configuration list for PBXNativeTarget "HOTEL_SHIFT" */;
+			buildPhases = (
+				A10000000000000000000030 /* Sources */,
+				A10000000000000000000031 /* Frameworks */,
+				A10000000000000000000032 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HOTEL_SHIFT;
+			productName = HOTEL_SHIFT;
+			productReference = A10000000000000000000017 /* HOTEL_SHIFT.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10000000000000000000041 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2710;
+				TargetAttributes = {
+					A10000000000000000000040 = {
+						CreatedOnToolsVersion = 16.0;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = A10000000000000000000060 /* Build configuration list for PBXProject "HOTEL_SHIFT" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = ja;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				ja,
+				en,
+				Base,
+			);
+			mainGroup = A10000000000000000000007;
+			productRefGroup = A10000000000000000000006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000000000000000000040 /* HOTEL_SHIFT */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10000000000000000000032 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000026 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10000000000000000000030 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000000000000000000002F /* ScheduleLinkedHorizontalScroll.swift in Sources */,
+				A1000000000000000000002E /* ShiftWorkspaceControls.swift in Sources */,
+				A1000000000000000000002C /* ScheduleGridSupport.swift in Sources */,
+				A1000000000000000000002D /* IntegratedScheduleGrid.swift in Sources */,
+				A1000000000000000000002A /* DayTimelineMath.swift in Sources */,
+				A1000000000000000000002B /* IntegratedDayTimeline.swift in Sources */,
+				A10000000000000000000020 /* HOTELSHIFTApp.swift in Sources */,
+				A10000000000000000000021 /* ShiftModels.swift in Sources */,
+				A10000000000000000000022 /* ShiftStore.swift in Sources */,
+				A90000000000000000000075 /* ShiftPhotoProcessing.swift in Sources */,
+				A90000000000000000000073 /* ShiftPersistence.swift in Sources */,
+				A90000000000000000000071 /* ShiftLookupIndex.swift in Sources */,
+				A90000000000000000000061 /* CloudSync.swift in Sources */,
+				A10000000000000000000023 /* ContentView.swift in Sources */,
+				A10000000000000000000024 /* ShiftCalendarView.swift in Sources */,
+				A10000000000000000000025 /* StaffAndOtherViews.swift in Sources */,
+				A10000000000000000000027 /* CSVHistoryFilterValidator.swift in Sources */,
+				A10000000000000000000028 /* CSVHistoryFeedbackPolicy.swift in Sources */,
+				A10000000000000000000029 /* CSVHistoryFeedbackPresentation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A10000000000000000000050 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A10000000000000000000051 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A10000000000000000000052 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HOTEL_SHIFT/HOTEL_SHIFT.entitlements;
+				DEVELOPMENT_TEAM = 294N3Z6JPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HOTEL_SHIFT/RequestInfo.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "HOTEL SHIFT";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.hotelshift.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A10000000000000000000053 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HOTEL_SHIFT/HOTEL_SHIFT.entitlements;
+				DEVELOPMENT_TEAM = 294N3Z6JPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HOTEL_SHIFT/RequestInfo.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "HOTEL SHIFT";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.hotelshift.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10000000000000000000060 /* Build configuration list for PBXProject "HOTEL_SHIFT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000050 /* Debug */,
+				A10000000000000000000051 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10000000000000000000061 /* Build configuration list for PBXNativeTarget "HOTEL_SHIFT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000052 /* Debug */,
+				A10000000000000000000053 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A10000000000000000000041 /* Project object */;
+}

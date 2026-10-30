@@ -1,0 +1,82 @@
+{
+  "tool": "Tree-sitter Swift; not SDK/type/runtime validation",
+  "version": "FIXED546",
+  "files": [
+    {
+      "file": "HOTEL_SHIFT/HOTELSHIFTApp.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/CSVHistoryFeedbackPolicy.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/CSVHistoryFeedbackPresentation.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/DayTimelineMath.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ScheduleGridSupport.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ShiftLookupIndex.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ShiftModels.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/CSVHistoryFilterValidator.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/CloudSync.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftPersistence.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftPhotoProcessing.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftStore.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ContentView.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/IntegratedDayTimeline.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/IntegratedScheduleGrid.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ScheduleLinkedHorizontalScroll.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ShiftCalendarView.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ShiftWorkspaceControls.swift",
+      "parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/StaffAndOtherViews.swift",
+      "parse_error": false
+    }
+  ]
+}

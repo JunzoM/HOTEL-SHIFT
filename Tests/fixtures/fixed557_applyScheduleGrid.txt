@@ -1,0 +1,40 @@
+    func applyScheduleGrid(_ edits: [ScheduleGridEdit], locationID: UUID, revision: UInt64,
+                           allowLeave: Bool = false) throws -> ScheduleGridChange? {
+        guard !storageWriteBlocked else { throw DayShiftEditError.storage }
+        guard locationID == selectedLocationID, revision == pdfRevision else { throw DayShiftEditError.changed }
+        guard Set(edits.map(\.key)).count == edits.count else { throw DayShiftEditError.invalid }
+        let leaveKeys = Set(selectedRequestsUnsorted.filter { $0.status == .approved }
+            .map { ScheduleGridKey(staffID: $0.staffID, dateKey: $0.dateKey) })
+        let activeStaff = Set(selectedStaff.filter(\.isActive).map(\.id))
+        let byCell = Dictionary(grouping: selectedAssignments) { ScheduleGridKey(staffID: $0.staffID, dateKey: $0.dateKey) }
+        for edit in edits {
+            guard activeStaff.contains(edit.key.staffID) else { throw DayShiftEditError.unavailable }
+            guard Date.keyFormatter.date(from: edit.key.dateKey)?.shiftDateKey == edit.key.dateKey else { throw DayShiftEditError.invalid }
+            let matches = byCell[edit.key] ?? []
+            guard matches.count <= 1, matches.first == edit.before else { throw DayShiftEditError.changed }
+            if let next = edit.after {
+                guard next.staffID == edit.key.staffID, next.dateKey == edit.key.dateKey, next.locationID == locationID,
+                      ShiftMinuteValidation.valid(next) else { throw DayShiftEditError.invalid }
+                if !allowLeave && leaveKeys.contains(edit.key) && DayTimelineMath.span(next) != nil { throw DayShiftEditError.leave }
+            }
+        }
+        let changes = edits.filter { $0.before != $0.after }
+        guard !changes.isEmpty else { return nil }
+        let replacements = Dictionary(uniqueKeysWithValues: changes.map { ($0.key, $0) })
+        var replaced = Set<ScheduleGridKey>()
+        var updated: [ShiftAssignment] = data.assignments.compactMap { current in
+            let key = ScheduleGridKey(staffID: current.staffID, dateKey: current.dateKey)
+            guard current.locationID == locationID, let edit = replacements[key] else { return current }
+            replaced.insert(key)
+            return edit.after
+        }
+        for edit in changes where !replaced.contains(edit.key) {
+            if let next = edit.after { updated.append(next) }
+        }
+        guard Set(updated.map(\.id)).count == updated.count else { throw DayShiftEditError.invalid }
+        if changes.allSatisfy({ $0.before != nil && $0.after != nil }) {
+            var next = data; next.assignments = updated; publishValueEdit(next)
+        } else { data.assignments = updated }
+        return ScheduleGridChange(locationID: locationID, edits: changes)
+    }
+

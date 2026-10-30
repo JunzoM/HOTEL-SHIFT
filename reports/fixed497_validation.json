@@ -1,0 +1,7 @@
+{
+  "release": "FIXED497",
+  "syntax": "15/15 passed",
+  "build": "BUILD SUCCEEDED (arm64 iOS Simulator)",
+  "layout_review": "Mode group and edit button share one centered HStack inside width-constrained ZStack. Trailing options/save group independently aligned; lower row unchanged.",
+  "limits": "Source layout review; no new simulator screenshot"
+}

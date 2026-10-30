@@ -1,0 +1,10 @@
+{
+  "release": "FIXED495",
+  "swift_syntax": "15/15 passed",
+  "production_build": "BUILD SUCCEEDED (arm64 iOS Simulator)",
+  "visual_build": "BUILD SUCCEEDED",
+  "visual_review": "iPad landscape with sidebar: mode/edit matching height, date/today below, pattern hidden, no clipping",
+  "screenshot": "fixed495_shift_toolbar.png",
+  "scope": "shift toolbar layout only; production starts at Home; existing data format unchanged",
+  "limits": "No physical iPad test"
+}

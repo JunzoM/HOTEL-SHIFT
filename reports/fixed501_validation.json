@@ -1,0 +1,10 @@
+{
+  "release": "FIXED501",
+  "change": "iCloud enabled/paused state controlled by Toggle; sync now no longer implicitly enables synchronization; invitation management and sync disabled while off",
+  "syntax": "16/16 passed",
+  "build": "BUILD SUCCEEDED (arm64 iOS Simulator)",
+  "regression": "verify_fixed500.py passed (sync decision and configuration safeguards)",
+  "visual": "Simulator Settings screenshot reviewed: iCloud toggle at top, off status and disabled actions; no clipping",
+  "screenshot": "fixed501_icloud_toggle.png",
+  "limits": "Live cross-account invitations/sync, Apple provisioning and CloudKit schema setup remain unverified as documented in README; no new live-cloud operation attempted"
+}

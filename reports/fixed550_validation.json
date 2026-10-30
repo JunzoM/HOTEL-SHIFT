@@ -1,0 +1,10 @@
+{
+  "version": "FIXED550",
+  "syntax": "19 Swift files parsed",
+  "builds": {
+    "iOS Simulator": "passed",
+    "Mac Catalyst": "passed"
+  },
+  "visual_check": "Unavailable: Computer Use permissions are not granted",
+  "scope": "9 primary screens; common desktop shell and controls"
+}

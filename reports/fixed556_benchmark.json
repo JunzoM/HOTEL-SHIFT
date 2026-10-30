@@ -1,0 +1,19 @@
+{
+  "batch_baseline_ms" : 5453.7493333318707,
+  "batch_optimized_ms" : 136.50341666652821,
+  "batch_requests" : 200,
+  "batch_speedup" : 39.953207520476489,
+  "correctness" : "before\/after equal; missing\/duplicate cells checked",
+  "days" : 1096,
+  "index_build_ms" : 2180.2427083330258,
+  "locations" : 10,
+  "pdf_snapshot_rows_after" : 1550,
+  "pdf_snapshot_rows_before" : 548000,
+  "preview_baseline_ms" : 109.93391666670504,
+  "preview_optimized_ms" : 5.7196249999833526,
+  "preview_speedup" : 19.220476284201329,
+  "rows" : 548000,
+  "scope" : "release-mode query\/batch core; excludes PDF drawing, UI, JSON persistence and cloud sync",
+  "shift_struct_stride_bytes" : 192,
+  "staff_per_location" : 50
+}

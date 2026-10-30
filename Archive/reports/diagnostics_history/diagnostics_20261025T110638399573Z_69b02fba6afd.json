@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-25T11:06:38.399043+00:00",
+  "recent_versions": 2,
+  "overall_status": "passed",
+  "checks": {
+    "swift_syntax": {
+      "status": "passed",
+      "exit_code": 0,
+      "stdout": "Swift parse: 9/9 passed (syntax only; no iOS build)\n",
+      "stderr": "",
+      "duration_seconds": 1.247
+    },
+    "triage_regression": {
+      "status": "passed",
+      "exit_code": 0,
+      "stdout": "=== FIXED407 ===\nOK\n=== FIXED408 ===\nOK\nRegression summary: 2 passed, 0 failed, 2 total\n\nTriage editor regression suite passed.\n",
+      "stderr": "",
+      "duration_seconds": 2.16,
+      "test_counts": {
+        "passed": 2,
+        "failed": 0,
+        "total": 2
+      }
+    }
+  },
+  "note": "Swift syntax parsing is not an Xcode/iOS build."
+}

@@ -1,0 +1,8 @@
+{
+  "release": "FIXED496",
+  "syntax": "15/15 passed",
+  "build": "BUILD SUCCEEDED (arm64 iOS Simulator)",
+  "layout_review": "Compared StaffView and RequestsView outer padding: both now zero top padding under shared header. Requests horizontal/bottom padding and inner card padding unchanged.",
+  "scope": "Single outer-padding adjustment; no data or behavior changes",
+  "limits": "No new simulator screenshot for this spacing-only change"
+}

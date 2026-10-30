@@ -1,0 +1,29 @@
+{
+  "correctness" : "weekly year\/leap\/month boundaries and complete edited arrays match",
+  "days" : 1096,
+  "grid" : {
+    "1" : {
+      "after_ms" : 131.28149999829475,
+      "before_ms" : 241.29808333236724,
+      "speedup" : 1.8380204624071292
+    },
+    "50" : {
+      "after_ms" : 132.42462500056718,
+      "before_ms" : 243.53783333390311,
+      "speedup" : 1.8390675701959514
+    }
+  },
+  "locations" : 10,
+  "noop_after_ms" : 0.00033333162718918175,
+  "noop_before_ms" : 91.193250000287662,
+  "rows" : 548000,
+  "scope" : "Swift -O local Mac; query\/edit core only; excludes UI, disk persistence and cloud",
+  "staff_per_location" : 50,
+  "uuid_temporary_array_bytes_removed" : 8768000,
+  "weekly_after_ms" : 2.9204583333921619,
+  "weekly_before_ms" : 2938.8902499995311,
+  "weekly_dates_prepared" : 35,
+  "weekly_records_after" : 1750,
+  "weekly_records_before" : 54800,
+  "weekly_speedup" : 1006.3113095628247
+}

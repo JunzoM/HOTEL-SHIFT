@@ -1,0 +1,10 @@
+{
+  "version": "FIXED553",
+  "builds": {
+    "iOS Simulator": "passed",
+    "Mac Catalyst": "passed"
+  },
+  "appearance_assertions": 11,
+  "visual_verification": "not performed",
+  "rotation_state_verification": "hierarchy reviewed; not device-tested"
+}

@@ -1,0 +1,25 @@
+{
+  "version": "FIXED493",
+  "changes": [
+    "Move More and save/check indicator to upper workspace row",
+    "Scale month/week/day font and dimensions by 1.2",
+    "Hide repeated large page names above cards on Staff, Requests, Backup, Output and Locations"
+  ],
+  "checks": {
+    "syntax": "15/15 passed",
+    "build": "iOS Simulator arm64 succeeded",
+    "scope": "Data/model, store, common header/sidebar, grid/day editing and bulk-toolbar code unchanged",
+    "layout": "Keep 80pt header and edit/pattern anchor; explicitly leading-align lower row after moving full-width content",
+    "README": "single README.md maintained"
+  },
+  "visual": {
+    "device": "Dedicated iPad Pro 13-inch M5 Simulator in landscape",
+    "images": [
+      "fixed493_shift_header.png",
+      "fixed493_requests_title_hidden.png"
+    ],
+    "observed": "More/check are on upper row; enlarged tabs fit; undo/redo/department/pattern fit on lower row, with Edit and Pattern left-aligned. Large requests page title hidden while sidebar label and controls remain.",
+    "method": "Separate validation copy changes only initial-page launch selection and orientation. Production still launches Home.",
+    "limitations": "Other removed page titles verified in source; physical-device interactions not manually exercised."
+  }
+}

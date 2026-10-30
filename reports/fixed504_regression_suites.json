@@ -1,0 +1,46 @@
+{
+  "477": {
+    "passed": true,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 3.456s\n\nOK\n"
+  },
+  "478": {
+    "passed": true,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 3.138s\n\nOK\n"
+  },
+  "484": {
+    "passed": true,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 3.033s\n\nOK\n"
+  },
+  "488": {
+    "passed": true,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 2.747s\n\nOK\n"
+  },
+  "490": {
+    "passed": true,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 2.665s\n\nOK\n"
+  },
+  "499": {
+    "passed": true,
+    "output": "Standard preset defaults, stable IDs, edit/persistence, future assignments and grid edits, existing-shift preservation, invalid/stale/location rejection and JSON roundtrip passed\n"
+  },
+  "500": {
+    "passed": true,
+    "output": "Initial divergence, equal snapshots, remote-only/local-only updates, concurrent edits and missing revision guards passed\nCapabilities, invitation setup, atomic conditional saves, latest-local/revision/account guards and private invitations checked\n"
+  },
+  "502": {
+    "passed": true,
+    "output": "First-tap reconnect/existing-share/new-share/fresh-workspace paths, payload preservation, presentation after preparation, duplicate-open guard and error cleanup passed\nStable Settings presenter and background-sync exclusion checked; real CloudKit/iOS sharing UI not exercised\n"
+  },
+  "503": {
+    "passed": true,
+    "output": "4 stores x 25 staff; 6100 shifts, 200 requests; approved-leave consistency, stable/unique IDs, existing-data preservation, duplicate/protected guards, leap/year-boundary and backup roundtrip passed\n"
+  },
+  "504_cloud": {
+    "passed": true,
+    "output": "Actual sync flow: metadata-only idle, snapshot-resume race, correct next upload, stable conflict identity, stale confirmation rejection, remote install, edit-during-archive protection and modal exclusion passed\n"
+  },
+  "504_pattern_token": {
+    "passed": true,
+    "output": "Actual pattern confirmation: compact token, every data revision invalidates, range/selection/deleted-pattern protection preserved; no whole-photo JSON encoding\n"
+  }
+}

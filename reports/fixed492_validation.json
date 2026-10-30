@@ -1,0 +1,26 @@
+{
+  "version": "FIXED492",
+  "changes": [
+    "One shared top date, notification icon and shop switcher for all screens",
+    "Remove duplicate in-workspace shop pickers",
+    "Open sidebar upon entering or reselecting Shifts",
+    "Fixed AppPage.allCases order and shared sidebar logo"
+  ],
+  "checks": {
+    "syntax": "15/15 passed",
+    "build": "iOS Simulator arm64 succeeded",
+    "sidebar_source": "No automatic collapse or selected-page reordering remains",
+    "regressions": "Store/model, schedule editing, and request bulk bar unchanged",
+    "README": "single README.md maintained"
+  },
+  "visual": {
+    "device": "iPad Pro 13-inch M5 Simulator, landscape",
+    "images": [
+      "fixed492_shift_header.png",
+      "fixed492_requests_header.png"
+    ],
+    "observed": "Both screens show date left and notification/shop switcher right. Sidebar open with logo, Home then Shifts then Requests in fixed order. No duplicate shop switcher in workspace.",
+    "method": "Separate verification copy uses launch-only initial-page and landscape overrides. Production starts on Home.",
+    "limitations": "Manual screen transitions and store-menu taps not exercised; open-on-entry/reselect verified in source."
+  }
+}

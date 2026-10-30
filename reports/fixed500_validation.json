@@ -1,0 +1,25 @@
+{
+  "release": "FIXED500",
+  "includes": "FIXED499 standard working-time presets and FIXED500 CloudKit sharing",
+  "production_build": "BUILD SUCCEEDED, arm64 iOS Simulator, code signing disabled",
+  "visual_build": "BUILD SUCCEEDED for isolated Settings-launch copy; final UI screenshot not captured",
+  "tests": [
+    "16/16 Swift syntax passed",
+    "verify_fixed499.py passed: standard defaults/edit persistence/new assignments/grid/preservation/JSON roundtrip",
+    "verify_fixed500.py passed: initial divergence, equal snapshots, remote-only/local-only/concurrent updates, missing revision guards; entitlement and conditional-save configuration checks",
+    "verify_fixed484.py passed: staff profile/date/time regression"
+  ],
+  "cloudkit_design": {
+    "container": "iCloud.jp.hotelshift.app",
+    "scope": "All ShiftData, private root shared by invitation with distinct Apple Accounts",
+    "sync": "Local save debounce, active/foreground checks and 30-second foreground polling",
+    "conflicts": "Whole-dataset explicit resolution; safety backups and conditional atomic CloudKit save"
+  },
+  "not_verified": [
+    "Apple Developer container registration and provisioning",
+    "CloudKit development/production schema setup",
+    "Actual cross-account invitation acceptance and end-to-end synchronization",
+    "Physical iPad operation"
+  ],
+  "review_limit": "A subsequent optional final UI/conflict-confirmation refinement and rebuild command was rejected before execution because approval review usage was exhausted; the rejection was not a safety determination. Included sources are the previously successful build, unchanged by that rejected command."
+}

@@ -1,0 +1,81 @@
+{
+  "tool": "Tree-sitter Swift; no Apple SDK/type checking",
+  "files": [
+    {
+      "file": "HOTEL_SHIFT/HOTELSHIFTApp.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/CSVHistoryFeedbackPolicy.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/CSVHistoryFeedbackPresentation.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/DayTimelineMath.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ScheduleGridSupport.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ShiftLookupIndex.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ShiftModels.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/CSVHistoryFilterValidator.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/CloudSync.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftPersistence.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftPhotoProcessing.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftStore.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ContentView.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/IntegratedDayTimeline.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/IntegratedScheduleGrid.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ScheduleLinkedHorizontalScroll.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ShiftCalendarView.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ShiftWorkspaceControls.swift",
+      "has_parse_error": false
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/StaffAndOtherViews.swift",
+      "has_parse_error": false
+    }
+  ]
+}

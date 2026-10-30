@@ -1,0 +1,14 @@
+{
+  "version": "FIXED481",
+  "base": "FIXED480",
+  "bulk_toolbar_scale": 2,
+  "button_font_pt": 24,
+  "button_min_height_pt": 60,
+  "button_horizontal_padding_pt": 20,
+  "spacing_pt": 24,
+  "bar_padding_pt": 16,
+  "header_button_scale": 1,
+  "swift_syntax_files": 15,
+  "full_ios_simulator_build": "passed arm64 and x86_64",
+  "new_visual_capture": "not performed"
+}

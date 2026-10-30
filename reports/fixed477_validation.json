@@ -1,0 +1,12 @@
+{
+  "version": "FIXED477",
+  "base": "FIXED476",
+  "reference": "EldiaShift-main.zip",
+  "full_ios_simulator_build": "passed (arm64 and x86_64)",
+  "swift_syntax_files": 11,
+  "executable_timeline_and_store_tests": "passed",
+  "existing_pdf_tests": "FIXED455 and FIXED460 passed",
+  "pdf_renderer_and_output_view": "byte-for-byte unchanged",
+  "saved_data_schema": "byte-for-byte unchanged",
+  "physical_device_gestures": "not tested"
+}

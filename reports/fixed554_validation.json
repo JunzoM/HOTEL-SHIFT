@@ -1,0 +1,11 @@
+{
+  "version": "FIXED554",
+  "regression_scenarios": 10,
+  "before_fix": "failed as expected: stale result after revision change",
+  "after_fix": "10 passed",
+  "builds": {
+    "iOS Simulator": "passed",
+    "Mac Catalyst": "passed"
+  },
+  "visual_verification": "not performed"
+}

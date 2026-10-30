@@ -1,0 +1,18 @@
+{
+  "release": "FIXED502",
+  "syntax": "16/16 passed",
+  "build": "BUILD SUCCEEDED, arm64 iOS Simulator",
+  "tests": [
+    "verify_fixed500.py passed (existing sync policy/configuration regression)",
+    "verify_fixed502.py passed: actual prepareSharing/sharingPresentation methods run against CloudKit stubs; first-tap reconnect, existing/new sharing, fresh workspace, duplicate-open exclusion, error cleanup and payload preservation; ready state published after busy=false"
+  ],
+  "presentation_fix": [
+    "Share sheet moved from Form Section to SettingsView Form",
+    "Preparation completes before publishing presentation item",
+    "Background synchronization skips while share presentation exists",
+    "Existing private workspace reconnect continues to display within first action"
+  ],
+  "visual": "Isolated Settings-launch build and screenshot reviewed: management and sync in distinct rows, circular plus at right",
+  "screenshot": "fixed502_icloud_actions.png",
+  "limits": "Real Apple CloudKit sharing-controller dismissal and multi-account end-to-end sync cannot be reproduced in this environment. Physical-device confirmation remains required."
+}

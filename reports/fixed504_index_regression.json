@@ -1,0 +1,16 @@
+{
+  "checks" : [
+    "append",
+    "delete",
+    "reorder",
+    "note\/type edit",
+    "staff moves",
+    "request edits",
+    "pattern\/time location edits",
+    "bounded cache eviction",
+    "old-generation-photo-references-released"
+  ],
+  "differential_mutations" : 180,
+  "long_history_assignments" : 73100,
+  "metadata_index_refresh_ms" : 17.577833321411163
+}

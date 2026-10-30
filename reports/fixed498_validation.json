@@ -1,0 +1,18 @@
+{
+  "release": "FIXED498",
+  "syntax": "15/15 passed",
+  "production_build": "BUILD SUCCEEDED (arm64 iOS Simulator)",
+  "functional_tests": "verify_fixed498.py passed: actual rename/save methods, standard/custom rename persistence, blank/duplicate rejection, staff identity/assignment preservation, pattern create/edit/invalid/stale/location guards, JSON roundtrip",
+  "visual_build": "BUILD SUCCEEDED, isolated copy only",
+  "visual_review": [
+    "Settings: facility section removed, basic pattern entry visible",
+    "Basic patterns: title and new + button visible",
+    "Department management: standard badge and pencil buttons visible on standard rows"
+  ],
+  "screenshots": [
+    "fixed498_settings.png",
+    "fixed498_patterns.png",
+    "fixed498_departments.png"
+  ],
+  "limits": "No physical iPad test. Native tap-driven editor flow not manually exercised; underlying existing editor retained. Department candidate names are local UserDefaults preferences as documented in README."
+}

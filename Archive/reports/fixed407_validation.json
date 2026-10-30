@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-25T11:04:40.386124+00:00",
+  "recent_versions": 2,
+  "overall_status": "passed",
+  "checks": {
+    "swift_syntax": {
+      "status": "passed",
+      "exit_code": 0,
+      "stdout": "Swift parse: 9/9 passed (syntax only; no iOS build)\n",
+      "stderr": "",
+      "duration_seconds": 1.05
+    },
+    "triage_regression": {
+      "status": "passed",
+      "exit_code": 0,
+      "stdout": "=== FIXED406 ===\nOK\n=== FIXED407 ===\nOK\nRegression summary: 2 passed, 0 failed, 2 total\n\nTriage editor regression suite passed.\n",
+      "stderr": "",
+      "duration_seconds": 2.761,
+      "test_counts": {
+        "passed": 2,
+        "failed": 0,
+        "total": 2
+      }
+    }
+  },
+  "note": "Swift syntax parsing is not an Xcode/iOS build.",
+  "baseline_comparison": {
+    "swift_syntax": {
+      "availability": "available",
+      "previous_status": "passed",
+      "current_status": "passed",
+      "new_failure": false,
+      "duration_delta_seconds": 0.058
+    },
+    "triage_regression": {
+      "availability": "available",
+      "previous_status": "passed",
+      "current_status": "passed",
+      "new_failure": false,
+      "duration_delta_seconds": 0.159,
+      "failed_delta": 0
+    }
+  },
+  "baseline_source": "/mnt/data/work407/HOTEL_SHIFT/reports/fixed407_validation_history/diagnostics_20261025T110435912435Z_6a3fd1ef94e7.json"
+}

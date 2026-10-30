@@ -1,0 +1,29 @@
+    private var weeklyHourAlerts: [(name: String, week: String, hours: Double)] {
+        return renderCache.value(for: ShiftRenderKey(revision: store.pdfRevision, location: store.selectedLocationID, scope: "labor|weeklyHourAlerts|" + monthPrefix)) {
+
+        let calendar = Calendar(identifier: .gregorian)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let weekFormatter = DateFormatter()
+        weekFormatter.locale = Locale(identifier: "ja_JP")
+        weekFormatter.dateFormat = "M/d"
+        var totals: [String: (name: String, week: String, hours: Double)] = [:]
+        // Include neighboring-month shifts when checking a week that overlaps the selected month.
+        let staffByID = Dictionary(uniqueKeysWithValues: store.selectedStaff.map { ($0.id, $0) })
+        for assignment in store.selectedAssignments {
+            guard let date = dateFormatter.date(from: assignment.dateKey),
+                  let interval = calendar.dateInterval(of: .weekOfYear, for: date),
+                  let staff = staffByID[assignment.staffID] else { continue }
+            let weekEnd = calendar.date(byAdding: .day, value: 6, to: interval.start) ?? interval.start
+            let selectedEnd = calendar.date(byAdding: .month, value: 1, to: selectedMonth) ?? selectedMonth
+            guard interval.start < selectedEnd && weekEnd >= selectedMonth else { continue }
+            let key = staff.id.uuidString + "_" + dateFormatter.string(from: interval.start)
+            let current = totals[key]
+            totals[key] = (staff.name, weekFormatter.string(from: interval.start) + "〜" + weekFormatter.string(from: weekEnd), (current?.hours ?? 0) + ShiftLaborEstimate.paidHours(assignment))
+        }
+        return totals.values.filter { $0.hours > 40.0 }.map { (name: $0.name, week: $0.week, hours: $0.hours) }
+            .sorted { $0.hours > $1.hours }
+    
+        }
+    }

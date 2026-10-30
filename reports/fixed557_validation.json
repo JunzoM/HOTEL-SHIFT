@@ -1,0 +1,27 @@
+{
+  "version": "FIXED557",
+  "backup_boundary_checks": 44,
+  "csv_checks": [
+    "historical wage",
+    "legacy fallback",
+    "zero wage",
+    "next day and midnight",
+    "escaping",
+    "write protection"
+  ],
+  "pdf_async_cases": 12,
+  "regressions": [
+    "cloud conflict flow",
+    "budget 32",
+    "filename 9",
+    "month/week grid",
+    "day timeline"
+  ],
+  "before_fix": "new backup and CSV regressions failed as expected",
+  "builds": {
+    "iOS Simulator": "passed",
+    "Mac Catalyst": "passed"
+  },
+  "visual_verification": "not performed",
+  "live_cloudkit_verification": "not performed"
+}

@@ -1,0 +1,15 @@
+{
+  "version": "FIXED478",
+  "base": "FIXED477",
+  "full_ios_simulator_build": "passed arm64 and x86_64",
+  "swift_syntax_files": 13,
+  "runtime_tests": [
+    "FIXED478 grid display, batch storage, copy planning and old decoding",
+    "FIXED477 timeline regression",
+    "FIXED455 and FIXED460 PDF regressions"
+  ],
+  "pdf_renderer_and_output_ui": "byte-for-byte preserved",
+  "daily_timeline_ui": "byte-for-byte preserved",
+  "compatibility": "optional patternNameSnapshot field; legacy decoding tested",
+  "device_ui_testing": "not performed"
+}

@@ -1,0 +1,30 @@
+{
+  "version": "FIXED480",
+  "base": "FIXED479",
+  "full_ios_simulator_build": "passed arm64 and x86_64",
+  "swift_syntax_files": 15,
+  "xcode_project": "valid",
+  "runtime_tests": [
+    "FIXED477 daily storage/math regression",
+    "FIXED478 grid/batch/copy regression",
+    "FIXED479 shared controls",
+    "FIXED455 and FIXED460 PDF regressions"
+  ],
+  "visual_validation": {
+    "device": "isolated iPad Pro 13-inch M5 iOS 27 simulator",
+    "orientation": "portrait",
+    "fixture": "32 staff in a separate validation copy; no seeded data or forced selection in the distributed source",
+    "checks": [
+      "date and headcount stay visible after vertical scrolling",
+      "final month screenshot is scrolled vertically and horizontally to the bottom/right; visible date columns align with assignment cells and current-day highlight",
+      "bulk toolbar visible with zero selected cells while editing",
+      "three-cell selection toolbar and denser weekly layout also captured"
+    ],
+    "screens": [
+      "reports/fixed480_scrolled_week.png",
+      "reports/fixed480_scrolled_month_empty_selection.png"
+    ],
+    "notes": "Month image uses final UIKit delegate-based horizontal linking. Week image was captured before changing the horizontal linking implementation; visible weekly design is unchanged. Physical gestures and landscape appearance are not manually verified."
+  },
+  "preserved": "storage, schema, PDF/output screen, normal app launch"
+}

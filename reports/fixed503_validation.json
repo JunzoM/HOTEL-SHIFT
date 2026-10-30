@@ -1,0 +1,20 @@
+{
+  "release": "FIXED503",
+  "syntax": "16/16 passed",
+  "production_build": "BUILD SUCCEEDED, arm64 iOS Simulator",
+  "test": "verify_fixed503.py passed: generated data validated by production backup validator, 25 staff per store, stable/unique IDs, staff/store relationships, approved leave/off consistency, existing-data preservation, duplicate/protected guards, leap-year/year boundary, JSON roundtrip",
+  "counts": {
+    "stores": 4,
+    "staff": 100,
+    "staff_per_store": 25,
+    "assignments_oct_nov_2026": 6100,
+    "requests": 200,
+    "patterns": 20,
+    "personal_work_times": 100
+  },
+  "behavior": "Fresh installations start with four sample stores; existing installations add via explicit Settings action without replacing data; same sample stores not added twice",
+  "visual": "Fresh isolated simulator: sample Tokyo selected, staff count 25 and populated list reviewed",
+  "screenshot": "fixed503_sample_staff.png",
+  "fixture": "Samples/サンプル4店舗_各25人_2026-10_11.json",
+  "limits": "No sample data uploaded to iCloud or inserted into the user physical iPad by this task. Existing iPad needs updated app and Settings add action."
+}

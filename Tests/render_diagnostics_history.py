@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""Generate an offline, interactive comparison of archived diagnostics reports."""
+import argparse
+import html
+import json
+from pathlib import Path
+
+
+def collect(directory):
+    records = []
+    for path in sorted(directory.glob('diagnostics_*.json'), reverse=True) if directory.exists() else []:
+        if not path.is_file():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding='utf-8'))
+            checks = data['checks']
+            if data.get('schema_version') != 1 or not isinstance(checks, dict) or not all(isinstance(checks.get(k), dict) and checks[k].get('status') in ('passed', 'failed', 'timeout', 'error') for k in ('swift_syntax', 'triage_regression')):
+                continue
+            records.append({'file': path.name, 'date': str(data.get('generated_at_utc', ''))[:32],
+                            'overall': 'passed' if all(checks[k]['status'] == 'passed' for k in ('swift_syntax', 'triage_regression')) else 'failed',
+                            'swift': checks['swift_syntax']['status'], 'regression': checks['triage_regression']['status'],
+                            'swift_seconds': checks['swift_syntax'].get('duration_seconds'),
+                            'regression_seconds': checks['triage_regression'].get('duration_seconds'),
+                            'failed_tests': (checks['triage_regression'].get('test_counts') or {}).get('failed')})
+        except (OSError, ValueError, TypeError, KeyError):
+            continue
+    return records
+
+
+def render(records):
+    payload = json.dumps(records, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026').replace('\u2028', '\\u2028').replace('\u2029', '\\u2029')
+    return '''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HOTEL SHIFT 診断履歴</title>
+<style>body{font:15px system-ui,sans-serif;background:#f5f6f9;color:#202637;max-width:1000px;margin:2rem auto;padding:0 1rem}section{background:white;padding:1.2rem;border-radius:12px;margin:1rem 0;box-shadow:0 1px 6px #0001}label{display:block;margin:.8rem 0}select{width:100%;max-width:450px;padding:.65rem;border:1px solid #9ba3b3;border-radius:8px}table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid #e3e5eb;padding:.7rem .4rem}th{font-size:.85rem;color:#526075}.passed{color:#087a45}.failed,.timeout,.error{color:#b3261e}.scroll{overflow-x:auto}small{color:#526075}</style></head><body><h1>HOTEL SHIFT 診断履歴</h1><p>保存済みの診断結果を選択し、実行時間や失敗件数の変化を確認できます。</p><section><label for="current">比較する診断</label><select id="current"></select><label for="baseline">比較元の診断</label><select id="baseline"></select><div id="comparison" aria-live="polite"></div></section><section><h2>保存履歴</h2><div class="scroll"><table><thead><tr><th>実行日時</th><th>総合</th><th>Swift</th><th>回帰</th><th>失敗件数</th></tr></thead><tbody id="history"></tbody></table></div></section><small>Swift構文解析はXcodeでのiPadアプリ実ビルドではありません。診断結果の比較のみを行い、元のJSONは変更しません。</small>
+<script>const records = ''' + payload + ''';
+const current=document.getElementById('current'),baseline=document.getElementById('baseline'),comparison=document.getElementById('comparison');
+const safe=(v)=>v===null||v===undefined?'—':String(v);
+const cell=(row,value,cls)=>{const td=document.createElement('td');td.textContent=safe(value);if(cls)td.className=cls;row.appendChild(td)};
+const option=(select,index,r)=>{const el=document.createElement('option');el.value=String(index);el.textContent=r.date+' ('+r.overall+')';select.appendChild(el)};
+records.forEach((r,i)=>{option(current,i,r);option(baseline,i,r);const tr=document.createElement('tr');cell(tr,r.date);cell(tr,r.overall,r.overall);cell(tr,r.swift,r.swift);cell(tr,r.regression,r.regression);cell(tr,r.failed_tests);document.getElementById('history').appendChild(tr)});
+function delta(a,b,unit){return typeof a==='number'&&Number.isFinite(a)&&typeof b==='number'&&Number.isFinite(b)?(a-b>0?'+':'')+(a-b).toFixed(unit==='秒'?2:0)+unit:'比較不可'}
+function draw(){comparison.replaceChildren();if(!records.length){comparison.textContent='有効な診断履歴はありません。';return}const a=records[Number(current.value)],b=records[Number(baseline.value)];const p=document.createElement('p');p.textContent='総合結果: '+a.overall+' / 比較元: '+b.overall;comparison.appendChild(p);const table=document.createElement('table');const tbody=document.createElement('tbody');[['Swift構文解析',a.swift,b.swift,delta(a.swift_seconds,b.swift_seconds,'秒')],['回帰テスト',a.regression,b.regression,delta(a.regression_seconds,b.regression_seconds,'秒')],['失敗件数',safe(a.failed_tests),safe(b.failed_tests),delta(a.failed_tests,b.failed_tests,'件')]].forEach(values=>{const tr=document.createElement('tr');values.forEach(value=>cell(tr,value));tbody.appendChild(tr)});const header=document.createElement('tr');['検査','選択した診断','比較元','差分'].forEach(v=>{const th=document.createElement('th');th.textContent=v;header.appendChild(th)});table.appendChild(header);table.appendChild(tbody);comparison.appendChild(table)}
+if(records.length>1)baseline.value='1';current.addEventListener('change',draw);baseline.addEventListener('change',draw);draw();</script></body></html>'''
+
+
+def write(directory, output):
+    result = render(collect(directory))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temp = output.with_name(output.name + '.tmp')
+    temp.write_text(result, encoding='utf-8')
+    temp.replace(output)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('history_dir', type=Path)
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    write(args.history_dir, args.output)
+    print(f'History dashboard: {args.output}')
+
+if __name__ == '__main__':
+    main()

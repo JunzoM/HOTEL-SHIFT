@@ -1,0 +1,20 @@
+{
+  "version": "FIXED558",
+  "benchmark_rows": 548000,
+  "result_equivalence": [
+    "weekly year/leap/month/noon boundaries",
+    "complete arrays after 1/50-cell edits"
+  ],
+  "regressions": [
+    "month/week grid including fast-path ID guards and undo",
+    "day timeline",
+    "PDF async 12",
+    "backup 44"
+  ],
+  "builds": {
+    "iOS Simulator": "passed",
+    "Mac Catalyst": "passed"
+  },
+  "visual_verification": "not performed",
+  "rss_measurement": "not performed"
+}

@@ -1,0 +1,30 @@
+{
+  "version": "FIXED490",
+  "mobile_form": "https://facility-manager-phi.vercel.app/hotel-shift/request",
+  "external_site_changes": "None; user-provided existing form is used. Standalone prototype is unused and not published.",
+  "build": "iOS Simulator arm64 succeeded",
+  "tests": {
+    "swift_syntax": "15/15 passed",
+    "verify_fixed490": "passed: exact form protocol, web/app links, embedded links, invalid origin/path/date/version, old optional fields, store-name matching and URL parameters",
+    "verify_fixed488": "passed including cross-location intake, location ownership, duplicate handling and protected storage",
+    "verify_fixed484": "passed",
+    "pdf_qr": "Passed with actual simulator-generated PDF: 1 page, 595x842 points, barcode decoded to supplied form with s=東京本店",
+    "native_url_registration": "Built Info.plist contains hotelshift and eldiashift; iOS open dialog identifies HOTEL SHIFT",
+    "regressions": "FIXED489 bulk bar, shift views and existing PDF output unchanged"
+  },
+  "visual": {
+    "device": "Dedicated iPad Pro 13-inch M5 simulator",
+    "qr_screen": "fixed490_qr_screen.png",
+    "intake_screen": "fixed490_link_intake.png",
+    "poster_pdf": "fixed490_qr_poster.pdf",
+    "poster_render": "fixed490_qr_poster.png",
+    "method": "Separate verification source copy opens QR sheet or injects decoded test link into the same production queue. PDF produced by actual posterPDF method. Landscape-only launch overrides exist only in that copy.",
+    "production": "Home launch, QR closed, no injected link or sample-data override",
+    "limitations": [
+      "iOS Open confirmation was identified but not manually pressed; intake display verified through test-copy queue injection",
+      "LINE transmission, physical QR scanning and printing were not performed",
+      "Receipt form scrolls to date chips and final registration action on compact sheet sizes"
+    ]
+  },
+  "compatibility_note": "Existing web receipt page opens eldiashift://request. When another app registers the same scheme, paste the link into HOTEL SHIFT instead. No Universal Links association is asserted."
+}

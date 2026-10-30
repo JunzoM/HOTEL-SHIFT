@@ -1,0 +1,85 @@
+{
+  "tool": "Tree-sitter Swift (not swiftc, no type checking or SDK validation)",
+  "versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-swift": "0.7.4"
+  },
+  "files": [
+    {
+      "file": "HOTEL_SHIFT/HOTELSHIFTApp.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/CSVHistoryFeedbackPolicy.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/CSVHistoryFeedbackPresentation.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/DayTimelineMath.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ScheduleGridSupport.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ShiftLookupIndex.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Models/ShiftModels.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/CSVHistoryFilterValidator.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/CloudSync.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftPersistence.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftPhotoProcessing.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Services/ShiftStore.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ContentView.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/IntegratedDayTimeline.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/IntegratedScheduleGrid.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ScheduleLinkedHorizontalScroll.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ShiftCalendarView.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/ShiftWorkspaceControls.swift",
+      "errors": []
+    },
+    {
+      "file": "HOTEL_SHIFT/Views/StaffAndOtherViews.swift",
+      "errors": []
+    }
+  ]
+}

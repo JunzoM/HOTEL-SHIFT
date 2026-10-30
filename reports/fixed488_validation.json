@@ -1,0 +1,39 @@
+{
+  "version": "FIXED488",
+  "build": {
+    "result": "passed",
+    "target": "iOS Simulator arm64, iOS 17 deployment target",
+    "log": "fixed488_build.log"
+  },
+  "tests": {
+    "swift_syntax": "15/15 passed",
+    "verify_fixed488": "passed: production parser/receive/batch/delete methods",
+    "verify_fixed484": "passed: profile and compatibility regression",
+    "verify_fixed477": "passed",
+    "verify_fixed478": "passed",
+    "verify_fixed479": "passed",
+    "pdf_output": "OutputView and staff-name PDF layout unchanged from FIXED487"
+  },
+  "visual": {
+    "method": "Dedicated iPad Simulator, temporary source copy with sample data and requests launch only",
+    "production_state": "Home remains initial page; no sample or orientation override added",
+    "images": [
+      "fixed488_requests.png"
+    ],
+    "limitations": [
+      "Physical taps, sharing to another app and hardware gestures not manually exercised"
+    ],
+    "observed": "Landscape iPad: all table columns and row actions visible, centered month and bulk toolbar, rectangular actions, matching navy sidebar and bottom close control",
+    "orientation": "Landscape launch override in temporary verification copy; screenshot rotated 90 degrees to normalize simulator pixel orientation"
+  },
+  "reference": [
+    "EldiaShift/LeaveRequests.swift",
+    "EldiaShift/LeaveRequestViews.swift",
+    "EldiaShift/Publish.swift"
+  ],
+  "not_included": [
+    "External QR/form hosting",
+    "Incoming app/universal links",
+    "iCloud sync"
+  ]
+}
